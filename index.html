@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090f15">
+<title>PROJECT20 — Протокол верификации</title>
+<style>
+:root{color-scheme:dark;--bg:#090f15;--panel:#101b24;--line:#294139;--text:#d8e9df;--muted:#8eaca0;--green:#79f2b1;--red:#ff8787;--amber:#f3cb74}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#17352e 0%,#090f15 60%);color:var(--text);font:16px/1.6 ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;min-height:100vh}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.14;background:repeating-linear-gradient(0deg,transparent 0px,transparent 3px,#000 4px);z-index:2}main{max-width:840px;margin:auto;padding:45px 20px 100px}.kicker{display:flex;justify-content:space-between;gap:10px;color:var(--green);font-size:12px;letter-spacing:2px}.pulse{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 12px var(--green);margin-right:8px}h1{font-size:clamp(38px,8vw,72px);margin:28px 0 0;line-height:1.1;letter-spacing:-3px}h1 span{color:var(--green)}.subtitle{color:var(--muted);letter-spacing:2px;text-transform:uppercase;font-size:12px;margin:15px 0 32px}.intro{white-space:pre-line;background:var(--panel);padding:22px;border:1px solid var(--line);border-left:3px solid var(--green);line-height:1.9}.progress-wrap{position:sticky;top:0;z-index:3;background:#0c1519ed;backdrop-filter:blur(12px);border:1px solid var(--line);padding:14px 18px;margin:30px 0}.progress-head{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:10px}.bar{height:6px;background:#24342f;overflow:hidden}.fill{height:100%;width:0;background:var(--green);box-shadow:0 0 14px #79f2b180;transition:width .35s}.question{border:1px solid var(--line);background:var(--panel);padding:22px;margin:16px 0;transition:border-color .2s}.question.solved{border-color:#3e8d64}.qtop{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:15px;font-size:11px;letter-spacing:1px;color:var(--muted)}.qtop strong{color:var(--green)}.qtext{font-size:16px;margin:0 0 20px;overflow-wrap:anywhere}.answerrow{display:flex;gap:9px}.answerrow input{min-width:0;flex:1;background:#091219;color:var(--text);border:1px solid #385249;padding:13px;font:inherit;border-radius:3px;outline:none}.answerrow input:focus{border-color:var(--green)}button{border:1px solid var(--green);background:#1d4535;color:#d9ffe9;padding:12px 16px;font:inherit;font-weight:bold;cursor:pointer;border-radius:3px;transition:.18s}button:hover:not(:disabled){background:#2a6349}button:disabled{opacity:.5;cursor:default}.feedback{min-height:20px;margin-top:12px;font-size:12px;color:var(--muted)}.feedback.good{color:var(--green)}.feedback.bad{color:var(--red)}.done{display:none;margin-top:35px;border:1px solid var(--green);padding:30px;background:linear-gradient(145deg,#123328,#101b24);box-shadow:0 0 50px #64e79c12}.done.visible{display:block}.done h2{color:var(--green);font-size:26px;margin:0 0 15px}.code{font-size:25px;color:var(--green);letter-spacing:3px;overflow-wrap:anywhere}.foot{font-size:11px;color:var(--muted);padding-top:32px;display:flex;justify-content:space-between;gap:12px}@media(max-width:560px){main{padding:25px 12px 70px}.answerrow{flex-direction:column}.question{padding:17px}.kicker{font-size:10px;letter-spacing:1px}.intro{padding:16px}}
+</style></head>
+<body><main>
+<div class="kicker"><div><span class="pulse"></span>SECURE ARCHIVE // NODE 20</div><div>IDENTITY VERIFICATION</div></div>
+<h1>PROJECT<span>20</span></h1><div class="subtitle">Protocol 01 / Access code recovery</div>
+<section class="intro">Для восстановления кода доступа, вам необходимо подтвердить свою личность.
+Далее будет список вопросов, на который сможет ответить только легитимный получатель модуля.
+В случае вопросов по верификации, обратитесь к отправителю модуля.</section>
+<div class="progress-wrap"><div class="progress-head"><span>VERIFIED RECORDS</span><strong id="counter">00 / 15</strong></div><div class="bar"><div class="fill" id="fill"></div></div></div>
+<div id="questions"></div>
+<section class="done" id="done" aria-live="polite"><h2>✓ IDENTITY VERIFIED</h2><p>Верификация получателя завершена. Все 15 записей успешно восстановлены.</p><p id="finalMessage">Код доступа находится на этапе подготовки. Ожидайте дальнейших инструкций от отправителя модуля.</p></section>
+<footer class="foot"><span>PROJECT20 // AUTHENTICATION SYSTEM</span><span>SECURE ARCHIVE REV.01</span></footer>
+</main>
+<script>
+"use strict";
+const QUESTIONS=[{"question":"Модель вашего первого смартфона","answers":["GT-S5280","GT-S5282","Samsung Galaxy Star","Galaxy Star"],"sector":"PERSONAL ARCHIVE"},{"question":"Субкультура нелегальных уличных гонок и дрифта по узким горным серпантинам, зародившаяся в Японии в 1980–1990-х годах","answers":["Тогэ","Тога","Toge","Touge"],"sector":"AUTOMOTIVE DATABASE"},{"question":"Персонаж Undertale, характер и имя которого отсылают к самому безвкусному и наивному шрифту","answers":["Sans","Санс"],"sector":"SIMULATION RECORDS"},{"question":"Мем из Minecraft, связанный с толстой овцой","answers":["Чикибамбони","чикибомбони"],"sector":"CORRUPTED MEMORIES"},{"question":"Оригинальный код видео про интересное взаимодействие с кувшином (идёт после https://www.youtube.com/watch?v=)","answers":["DHqhcZXdy9Y"],"sector":"CORRUPTED MEMORIES"},{"question":"Дата основания BMW (ДД.ММ.ГГГГ)","answers":["07.03.1916"],"sector":"AUTOMOTIVE DATABASE"},{"question":"Скоростная магистраль в Токио, популярная у нелегальных гонщиков","answers":["Ванган","Wangan"],"sector":"AUTOMOTIVE DATABASE"},{"question":"Легендарный лифтбэк Toyota, производившийся с 1983 по 1987 год","answers":["AE86","Sprinter Trueno","Trueno"],"sector":"AUTOMOTIVE DATABASE"},{"question":"Код набора LEGO, лазурного драгстера","answers":["42050"],"sector":"PERSONAL ARCHIVE"},{"question":"Как называется легендарная японская команда уличных гонщиков, участники которой специализировались на скоростных заездах по автомагистралям?","answers":["Mid Night Club","Midnight Club"],"sector":"AUTOMOTIVE DATABASE"},{"question":"Самая узнаваемая модель автомобиля из серии Need for Speed?","answers":["bmw m3 e46","bmw m3 (e46)","BMW M3 GTR (кузов E46)","BMW M3 GTR E46"],"sector":"SIMULATION RECORDS"},{"question":"Как называется японская техника дрифта, при которой автомобиль раскачивают перед входом в поворот?","answers":["Manji","Мандзи"],"sector":"AUTOMOTIVE DATABASE"},{"question":"Повреждённый фрагмент архива: 01001101 01001001 01001110 01000101 01000011 01010010 01000001 01000110 01010100. Восстановите текст в кодировке ASCII.","answers":["MINECRAFT"],"sector":"DATA RECOVERY"},{"question":"Самый массовый электросамокат в мире","answers":["Xiaomi M365","M365","Mijia M365"],"sector":"PERSONAL ARCHIVE"},{"question":"Полное название вашего любимого напитка без сахара","answers":["Monster Energy Ultra","Monster Ultra","Monster Ultra White","White Monster"],"sector":"PERSONAL ARCHIVE"}];
+// Заполни FINAL_ACCESS_CODE, когда определишь пароль от физического замка.
+const FINAL_ACCESS_CODE="";
+const STORAGE_KEY="project20_verified_v1";
+const saved=(()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]")}catch{return []}})();
+const verified=new Set(Array.isArray(saved)?saved.filter(i=>Number.isInteger(i)&&i>=0&&i<QUESTIONS.length):[]);
+const container=document.getElementById("questions");
+function normalize(value){return value.trim().toLocaleLowerCase("ru-RU").replace(/ё/g,"е").replace(/[\s()\-._]+/g,"").replace(/кузов/g,"");}
+function checkAnswer(index,input){
+ const raw=input.trim();
+ // Идентификаторы YouTube проверяются с учётом регистра.
+ if(index===4) return raw==="DHqhcZXdy9Y";
+ return QUESTIONS[index].answers.some(answer=>normalize(raw)===normalize(answer));
+}
+function refresh(){
+ const count=verified.size;
+ document.getElementById("counter").textContent=String(count).padStart(2,"0")+" / "+QUESTIONS.length;
+ document.getElementById("fill").style.width=(count/QUESTIONS.length*100)+"%";
+ if(count===QUESTIONS.length){
+   document.getElementById("done").classList.add("visible");
+   if(FINAL_ACCESS_CODE){document.getElementById("finalMessage").innerHTML="ВОССТАНОВЛЕННЫЙ КОД ДОСТУПА: <div class='code' id='accessCode'></div>";document.getElementById("accessCode").textContent=FINAL_ACCESS_CODE;}
+ }
+ try{localStorage.setItem(STORAGE_KEY,JSON.stringify([...verified]));}catch{}
+}
+QUESTIONS.forEach((item,i)=>{
+ const card=document.createElement("article");card.className="question";card.id="question-"+(i+1);
+ const top=document.createElement("div");top.className="qtop";
+ const number=document.createElement("strong");number.textContent="RECORD "+String(i+1).padStart(2,"0");const sector=document.createElement("span");sector.textContent=item.sector;top.append(number,sector);
+ const prompt=document.createElement("p");prompt.className="qtext";prompt.textContent=item.question;
+ const form=document.createElement("form");form.className="answerrow";form.noValidate=true;
+ const input=document.createElement("input");input.type="text";input.autocomplete="off";input.spellcheck=false;input.setAttribute("aria-label","Ответ на вопрос "+(i+1));input.placeholder="Введите ответ...";
+ const button=document.createElement("button");button.type="submit";button.textContent="ОТПРАВИТЬ";
+ const feedback=document.createElement("div");feedback.className="feedback";feedback.setAttribute("role","status");feedback.setAttribute("aria-live","polite");
+ function markCorrect(){card.classList.add("solved");input.disabled=true;button.disabled=true;button.textContent="✓ ПРИНЯТО";feedback.className="feedback good";feedback.textContent="✓ Ответ подтверждён. Запись восстановлена.";}
+ if(verified.has(i))markCorrect();
+ form.append(input,button);
+ form.addEventListener("submit",event=>{event.preventDefault();if(verified.has(i))return;
+ if(!input.value.trim()){feedback.className="feedback bad";feedback.textContent="Введите ответ.";return;}
+ if(checkAnswer(i,input.value)){verified.add(i);markCorrect();refresh();}
+ else{feedback.className="feedback bad";feedback.textContent="✕ RECORD MISMATCH — ответ не подтверждён. Попробуйте ещё раз.";input.focus();}
+ });
+ card.append(top,prompt,form,feedback);container.append(card);
+});
+refresh();
+</script></body></html>
